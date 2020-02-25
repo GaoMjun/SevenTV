@@ -1,21 +1,18 @@
 package com.seventv.network;
 
-import android.util.Log;
-
-import java.net.Inet4Address;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import fuckdns.Fuckdns;
 import okhttp3.Dns;
 
 public class SelfDns implements Dns {
 
-    private HashMap<String, List<InetAddress>> cache = new HashMap<>();
+    private Map<String, List<InetAddress>> cache = new HashMap<>();
 
     @Override
     public List<InetAddress> lookup(String hostname) throws UnknownHostException {

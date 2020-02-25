@@ -21,7 +21,9 @@ import com.seventv.R;
 import com.seventv.network.NetworkBasic;
 
 import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.io.IOUtils;
 
+import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -29,6 +31,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -57,7 +60,7 @@ public class WebViewActivity extends BaseActivity {
 
     private String mId;
 
-    public static Intent newIntent(Context context, String id){
+    public static Intent newIntent(Context context, String id) {
         Intent intent = new Intent(context, WebViewActivity.class);
         intent.putExtra(EXTRA_ID, id);
         return intent;
@@ -69,30 +72,41 @@ public class WebViewActivity extends BaseActivity {
         setContentView(R.layout.activity_webview);
         ButterKnife.bind(this);
 
+
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
         mId = getIntent().getStringExtra(EXTRA_ID);
+
         WebSettings webSettings = mWebView.getSettings();
         webSettings.setJavaScriptEnabled(true);
         webSettings.setDomStorageEnabled(true);
-        mWebView.setWebViewClient(new WebViewClient(){
+        mWebView.setWebViewClient(new WebViewClient() {
+
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 return true;
             }
 
-//            @Override
-//            public WebResourceResponse shouldInterceptRequest (final WebView view, String url) {
-//                Log.d("WebViewActivity", url);
-//
-//                if(url.contains("https://avgle.com/templates/frontend/avgle-main-ah.js")){
-//                    String r = NetworkBasic.getSync(url);
-//                    int idx = r.indexOf("':if(!window[_") + 2;
-//                    String newResult = ";document.addEventListener('DOMContentLoaded', function(){setTimeout(function(){console.log('123');closeAd();}, 3000);});" + r.substring(0, idx) + "return false;" + r.substring(idx);
-//                    InputStream data = new ByteArrayInputStream(newResult.getBytes(StandardCharsets.UTF_8));
-//                    return new WebResourceResponse("text/plain", "UTF-8", data);
-//                } else if(url.contains("https://ads-a.juicyads.com/") && url.contains(".jpg")){
-//                    return new WebResourceResponse("text/plain", "UTF-8", null);
-//                } else{
+            @Override
+            public WebResourceResponse shouldInterceptRequest (final WebView view, String url) {
+                try {
+                    String filename = FilenameUtils.getName(new URL(url).getPath());
+                    InputStream inputStream = WebViewActivity.this.getAssets().open("avgle/"+filename);
+                    if (inputStream != null) {
+                        String mimeType = "text/plain";
+                        if (filename.endsWith(".css")) {
+                            mimeType = "text/css";
+                        } else if (filename.endsWith(".js")) {
+                            mimeType = "application/javascript";
+                        }
+                        return new WebResourceResponse(mimeType, "UTF-8", new ByteArrayInputStream(IOUtils.toByteArray(inputStream)));
+                    }
+                } catch (Exception e) {
+//                    e.printStackTrace();
+                }
+
+                if(url.contains("https://ads-a.juicyads.com/") && url.contains(".jpg")) {
+                    return new WebResourceResponse("text/plain", "UTF-8", null);
+                } else {
 //                    try {
 //                        Response response = HTTP_CLIENT.newCall(new Request.Builder().url(url).build()).execute();
 //                        ResponseBody body = response.body();
@@ -101,29 +115,9 @@ public class WebViewActivity extends BaseActivity {
 //                    } catch (IOException e) {
 //                        e.printStackTrace();
 //                    }
-////                    return super.shouldInterceptRequest(view, url);
-//                    return null;
-//                }
-//            }
-
-            @Nullable
-            @Override
-            public WebResourceResponse shouldInterceptRequest(WebView view, WebResourceRequest request) {
-                String url = request.getUrl().toString();
-
-                try {
-                    String filename = FilenameUtils.getName(new URL(url).getPath());
-                    InputStream inputStream = WebViewActivity.this.getAssets().open(filename);
-                    if (inputStream != null) {
-                        return new WebResourceResponse("text/plain", "UTF-8", inputStream);
-                    }
-                } catch (Exception e) {
-//                    e.printStackTrace();
+                    Log.d("WebViewActivity", url);
+                    return super.shouldInterceptRequest(view, url);
                 }
-
-
-                Log.d("WebViewActivity", url);
-                return super.shouldInterceptRequest(view, request);
             }
         });
 
@@ -146,7 +140,7 @@ public class WebViewActivity extends BaseActivity {
             }
 
             @Override
-            public void onHideCustomView(){
+            public void onHideCustomView() {
                 if(isVideoFullScreen){
                     mContentLayout.setVisibility(View.VISIBLE);
                     mParentLayout.removeView(customView);
@@ -157,25 +151,6 @@ public class WebViewActivity extends BaseActivity {
 
         });
 
-        mWebView.loadUrl("file:///android_asset/avgle.html?id=" + mId);
+        mWebView.loadUrl("file:///android_asset/avgle/avgle.html?id=" + mId);
     }
-
-    private static Map<String, String> OkHttpHeadersToMap(Headers headers) {
-        Map<String, String> result = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
-
-        for (int i = 0, size = headers.size(); i < size; i++) {
-            String name = headers.name(i).toLowerCase(Locale.US);
-            String values = result.get(name);
-
-            if (values == null) {
-                values = "";
-                result.put(name, values);
-            }
-
-            if (values.length() > 0) { values += "; "; }
-            values += (headers.value(i));
-        }
-        return result;
-    }
-
 }

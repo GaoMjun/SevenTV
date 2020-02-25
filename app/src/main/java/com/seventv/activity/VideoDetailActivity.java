@@ -3,6 +3,7 @@ package com.seventv.activity;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -12,6 +13,7 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v4.widget.NestedScrollView;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.content.res.AppCompatResources;
 import android.support.v7.widget.LinearLayoutManager;
@@ -22,8 +24,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.bumptech.glide.Glide;
@@ -51,7 +55,11 @@ import com.seventv.network.parser.BestjavpornParser;
 import com.seventv.network.parser.NetflavParser;
 import com.seventv.network.parser.SevenParser;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.reactivex.Observable;
@@ -196,6 +204,28 @@ public class VideoDetailActivity extends BaseActivity {
                     Toast.makeText(VideoDetailActivity.this, getString(R.string.no_resource), Toast.LENGTH_SHORT).show();
                     return;
                 }
+
+                Map.Entry<String, List<SevenVideoSource.VideoUrl>> videoSource = mVideoDetail.getSevenVideoSource().getVideoSources().entrySet().iterator().next();
+
+                if (mVideoDetail.getSevenVideoSource().getVideoSources().size() > 1) {
+
+
+                    String[] list = mVideoDetail.getSevenVideoSource().getVideoSources().keySet().toArray();
+
+
+                    AlertDialog alertDialog = new AlertDialog.Builder(VideoDetailActivity.this)
+                            .setTitle("select one to play")
+                            .setItems(list, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                }
+                            }).create();
+                    alertDialog.show();
+                }
+
+
+
                 Intent intent;
                 if(mVideoDetail.getSevenVideoSource().needMoreSource()){
                     String[] split = mVideoDetail.getSevenVideoSource().getVideoSources().get(SevenVideoSource.AVGLE).get(0).url.split("/");
