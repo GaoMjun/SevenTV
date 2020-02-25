@@ -25,6 +25,7 @@ import android.view.animation.DecelerateInterpolator;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.github.chrisbanes.photoview.PhotoView;
@@ -250,6 +251,7 @@ public class GalleryActivity extends BaseActivity {
 
             Glide.with(imageView.getContext().getApplicationContext())
                     .load(imageUrls[position])
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .into(new SimpleTarget<Drawable>() {
                         @Override
                         public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {

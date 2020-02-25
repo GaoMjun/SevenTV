@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.VideoView;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -33,6 +34,7 @@ public class VideoListAdapter extends BaseQuickAdapter<Video, BaseViewHolder> {
 
         Glide.with(mContext)
                 .load(item.getThumbnailUrl())
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .placeholder(R.drawable.placeholder)
                 .transition(new DrawableTransitionOptions().crossFade(300))
                 .into((ImageView) helper.getView(R.id.video_thumbnail));

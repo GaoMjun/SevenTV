@@ -27,6 +27,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.android.flexbox.AlignItems;
 import com.google.android.flexbox.FlexDirection;
 import com.google.android.flexbox.FlexboxLayoutManager;
@@ -212,6 +213,7 @@ public class VideoDetailActivity extends BaseActivity {
         mCollapsingToolbarLayout.setTitle(mVideoDetail.getTitle());
         Glide.with(mToolbarLayoutBackground.getContext().getApplicationContext())
                 .load(mVideoDetail.getCoverUrl())
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(mToolbarLayoutBackground);
     }
 

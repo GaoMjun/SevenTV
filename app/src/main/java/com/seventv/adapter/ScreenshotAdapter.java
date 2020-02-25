@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.widget.ImageView;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.seventv.R;
@@ -22,6 +23,7 @@ public class ScreenshotAdapter extends BaseQuickAdapter<String, BaseViewHolder> 
 
         Glide.with(mContext)
                 .load(item)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into((ImageView) helper.getView(R.id.screenshot_image_view));
 
         helper.setOnClickListener(R.id.screenshot_image_view, v -> {

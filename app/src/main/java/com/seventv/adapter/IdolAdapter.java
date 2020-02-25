@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestBuilder;
 import com.bumptech.glide.RequestManager;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.request.RequestOptions;
@@ -44,7 +45,7 @@ public class IdolAdapter extends BaseQuickAdapter<Idol, BaseViewHolder> {
         if(item.getAvatarUrl() == null){
             rb = rm.load(R.drawable.avatar);
         } else {
-            rb = rm.load(item.getAvatarUrl());
+            rb = rm.load(item.getAvatarUrl()).diskCacheStrategy(DiskCacheStrategy.ALL);
         }
         rb.transition(new DrawableTransitionOptions().crossFade(300))
                 .apply(RequestOptions.bitmapTransform(new CircleCrop()))
