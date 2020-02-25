@@ -14,7 +14,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.content.res.AppCompatResources;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -24,10 +23,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.bumptech.glide.Glide;
@@ -55,10 +52,8 @@ import com.seventv.network.parser.BestjavpornParser;
 import com.seventv.network.parser.NetflavParser;
 import com.seventv.network.parser.SevenParser;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -205,38 +200,55 @@ public class VideoDetailActivity extends BaseActivity {
                     return;
                 }
 
-                Map.Entry<String, List<SevenVideoSource.VideoUrl>> videoSource = mVideoDetail.getSevenVideoSource().getVideoSources().entrySet().iterator().next();
+                Map<String, List<SevenVideoSource.VideoUrl>> videoSources = mVideoDetail.getSevenVideoSource().getVideoSources();
 
-                if (mVideoDetail.getSevenVideoSource().getVideoSources().size() > 1) {
+                ArrayList<String> keys = new ArrayList<>();
+                ArrayList<String> keys2 = new ArrayList<>();
 
+                for (Map.Entry<String, List<SevenVideoSource.VideoUrl>> entry : videoSources.entrySet()) {
+                    keys.add(entry.getKey());
+                    keys2.add(SevenVideoSource.SOURCE_NAME.get(entry.getKey()));
+                }
 
-                    String[] list = mVideoDetail.getSevenVideoSource().getVideoSources().keySet().toArray();
-
-
+                if (keys2.size() > 1) {
                     AlertDialog alertDialog = new AlertDialog.Builder(VideoDetailActivity.this)
                             .setTitle("select one to play")
-                            .setItems(list, new DialogInterface.OnClickListener() {
+                            .setItems(keys2.toArray(new String[keys2.size()]), new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-
+                                    String key = keys.get(which);
+                                    gotoPlayVideo(key, videoSources.get(key));
                                 }
                             }).create();
                     alertDialog.show();
-                }
-
-
-
-                Intent intent;
-                if(mVideoDetail.getSevenVideoSource().needMoreSource()){
-                    String[] split = mVideoDetail.getSevenVideoSource().getVideoSources().get(SevenVideoSource.AVGLE).get(0).url.split("/");
-                    intent = WebViewActivity.newIntent(VideoDetailActivity.this, split[split.length - 2]);
                 } else {
-                    intent = VideoPlayActivity.newIntent(VideoDetailActivity.this, mVideoDetail);
+                    String key = keys.get(0);
+                    gotoPlayVideo(key, videoSources.get(keys.get(0)));
                 }
-                startActivity(intent);
+
+//                Intent intent;
+//                if(mVideoDetail.getSevenVideoSource().needMoreSource()){
+//                    String[] split = mVideoDetail.getSevenVideoSource().getVideoSources().get(SevenVideoSource.AVGLE).get(0).url.split("/");
+//                    intent = WebViewActivity.newIntent(VideoDetailActivity.this, split[split.length - 2]);
+//                } else {
+//                    intent = VideoPlayActivity.newIntent(VideoDetailActivity.this, mVideoDetail);
+//                }
+//                startActivity(intent);
             }
         });
         mFloatingActionButton.bringToFront();
+    }
+
+    private void gotoPlayVideo(String key, List<SevenVideoSource.VideoUrl> videoUrls) {
+        switch (key) {
+            case SevenVideoSource.AVGLE:
+                String[] split = videoUrls.get(0).url.split("/");
+                Intent intent = WebViewActivity.newIntent(VideoDetailActivity.this, split[split.length - 2]);
+                startActivity(intent);
+                return;
+            default:
+                return;
+        }
     }
 
     private void setUpCover(){
