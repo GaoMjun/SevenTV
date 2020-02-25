@@ -11,6 +11,8 @@ import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.preference.PreferenceManager;
 import android.util.Log;
 import android.util.TypedValue;
+import android.webkit.WebView;
+
 import com.seventv.model.database.FavoriteDbHelper;
 import java.util.Locale;
 
@@ -41,6 +43,10 @@ public class SevenTVApplication extends Application {
         setNightMode(nightMode);
 
         mColor = PreferenceManager.getDefaultSharedPreferences(this).getString("theme_color", "pink");
+
+        if (BuildConfig.DEBUG) {
+            WebView.setWebContentsDebuggingEnabled(true);
+        }
     }
 
     public static long getVersionCode(Context context){

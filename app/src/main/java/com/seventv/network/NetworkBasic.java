@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.util.Log;
+import android.webkit.WebResourceRequest;
 import android.widget.Toast;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -37,9 +38,12 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.cert.X509Certificate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
@@ -59,6 +63,7 @@ import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import okhttp3.ResponseBody;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
@@ -92,6 +97,7 @@ public class NetworkBasic {
                     return cookies != null ? cookies : new ArrayList<Cookie>();
                 }
             })
+            .dns(new SelfDns())
             .build();
 
     public static Observable<String> getRedirectsUrl(String originUrl) {
@@ -287,6 +293,33 @@ public class NetworkBasic {
             urlConnection.disconnect();
         }
         return result;
+    }
+
+    public static ArrayList<String> doWebRequest(WebResourceRequest webRequest) {
+        Request.Builder builder = new Request.Builder().url(webRequest.getUrl().toString()).method(webRequest.getMethod(), null);
+        for (Map.Entry<String, String> entry : webRequest.getRequestHeaders().entrySet()) {
+            builder.addHeader(entry.getKey(), entry.getValue());
+        }
+        Request request = builder.build();
+        try {
+            Response response = HTTP_CLIENT.newCall(request).execute();
+
+            ResponseBody body = response.body();
+
+
+
+            return new ArrayList<String>() {
+                {
+                    body.contentType().subtype();
+                    new String(body.bytes());
+                }
+            };
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 
 }
