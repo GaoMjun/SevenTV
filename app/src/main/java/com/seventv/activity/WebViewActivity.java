@@ -115,7 +115,7 @@ public class WebViewActivity extends BaseActivity {
 //                    } catch (IOException e) {
 //                        e.printStackTrace();
 //                    }
-                    Log.d("WebViewActivity", url);
+//                    Log.d("WebViewActivity", url);
                     return super.shouldInterceptRequest(view, url);
                 }
             }
