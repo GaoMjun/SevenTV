@@ -3,7 +3,7 @@ package com.seventv.activity;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import com.seventv.R;
 import com.seventv.SevenTVApplication;
 import java.util.Locale;

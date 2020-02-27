@@ -1,6 +1,6 @@
 package com.seventv.model.database;
 
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 import com.seventv.SevenTVApplication;
 import com.seventv.model.Idol;
 import java.util.List;
