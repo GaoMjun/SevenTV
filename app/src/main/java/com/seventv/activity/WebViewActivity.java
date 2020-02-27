@@ -2,13 +2,18 @@ package com.seventv.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.webkit.WebViewAssetLoader;
 
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceResponse;
 import android.webkit.WebSettings;
@@ -23,6 +28,8 @@ import org.apache.commons.io.IOUtils;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 
 import butterknife.BindView;
@@ -50,12 +57,17 @@ public class WebViewActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
+
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         setContentView(R.layout.activity_webview);
         ButterKnife.bind(this);
 
-
-        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
         mId = getIntent().getStringExtra(EXTRA_ID);
+
+        WebViewAssetLoader assetLoader = new WebViewAssetLoader.Builder().addPathHandler("/assets/", new WebViewAssetLoader.AssetsPathHandler(this)).build();
 
         WebSettings webSettings = mWebView.getSettings();
         webSettings.setJavaScriptEnabled(true);
@@ -73,32 +85,43 @@ public class WebViewActivity extends BaseActivity {
                     String filename = FilenameUtils.getName(new URL(url).getPath());
                     InputStream inputStream = WebViewActivity.this.getAssets().open("avgle/"+filename);
                     if (inputStream != null) {
-                        String mimeType = "text/plain";
-                        if (filename.endsWith(".css")) {
-                            mimeType = "text/css";
-                        } else if (filename.endsWith(".js")) {
-                            mimeType = "application/javascript";
-                        }
-                        return new WebResourceResponse(mimeType, "UTF-8", new ByteArrayInputStream(IOUtils.toByteArray(inputStream)));
+                        inputStream.close();
+
+                        return assetLoader.shouldInterceptRequest(Uri.parse("https://appassets.androidplatform.net/assets/avgle/"+filename));
                     }
                 } catch (Exception e) {
-//                    e.printStackTrace();
                 }
 
-                if(url.contains("https://ads-a.juicyads.com/") && url.contains(".jpg")) {
-                    return new WebResourceResponse("text/plain", "UTF-8", null);
-                } else {
-//                    try {
-//                        Response response = HTTP_CLIENT.newCall(new Request.Builder().url(url).build()).execute();
-//                        ResponseBody body = response.body();
-//                        Log.d("WebViewActivity", body.contentType().toString());
-//                        return new WebResourceResponse(body.contentType().type(), "UTF-8", body.byteStream());
-//                    } catch (IOException e) {
-//                        e.printStackTrace();
+                Uri uri = Uri.parse(url);
+                String host = uri.getHost();
+
+                if ((host != null) &&
+                        (host.endsWith("avgle.com") ||
+                        host.endsWith("qooqlevideo.com") ||
+                        host.endsWith("gooqlevideo.xyz") ||
+                        host.equals("universal.bigbuckbunny.workers.dev"))) {
+
+//                    if (host.equals("avgle.com")) {
+//                        try {
+//                            String query = uri.getQuery();
+//                            if (query == null) {
+//                                query = "";
+//                            } else {
+//                                query = "&";
+//                            }
+//
+//                            query += "xprotocol=" + uri.getScheme() + "&" + "xhost=" + host;
+//
+//                            url = new URI("https", "universal.bigbuckbunny.workers.dev", uri.getPath(), query, uri.getFragment()).toString();
+//                            Log.d("WebViewActivity", url);
+//                        } catch (URISyntaxException e) {
+//                            e.printStackTrace();
+//                        }
 //                    }
-//                    Log.d("WebViewActivity", url);
                     return super.shouldInterceptRequest(view, url);
                 }
+
+                return new WebResourceResponse("text/plain", "UTF-8", null);
             }
         });
 
@@ -132,6 +155,29 @@ public class WebViewActivity extends BaseActivity {
 
         });
 
-        mWebView.loadUrl("file:///android_asset/avgle/avgle.html?id=" + mId);
+        mWebView.loadUrl("https://appassets.androidplatform.net/assets/avgle/avgle.html?id=" + mId);
+    }
+
+    @Override
+    protected void onPause() {
+        mWebView.onPause();
+        mWebView.pauseTimers();
+
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        mWebView.onResume();
+        mWebView.resumeTimers();
+    }
+
+    @Override
+    protected void onDestroy() {
+        mWebView.destroy();
+
+        super.onDestroy();
     }
 }
