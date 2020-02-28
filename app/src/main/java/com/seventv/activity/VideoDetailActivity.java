@@ -167,12 +167,13 @@ public class VideoDetailActivity extends BaseActivity {
 
     private void setUpDetail(){
         if (mVideoDetail.getSevenVideoSource().needMoreSource()){
-            Log.d("TEST_NETWORK", "try to load more source");
-            if(mCategory.equals(SevenAPI.CATEGORY_CHINESE)){
-                LoadNetflav();
-            } else {
-                LoadBestjavporn();
-            }
+            Log.d("VideoDetailActivity", "try to load more source");
+            LoadNetflav();
+//            if(mCategory.equals(SevenAPI.CATEGORY_CHINESE)){
+//                LoadNetflav();
+//            } else {
+//                LoadBestjavporn();
+//            }
         } else {
             mSourceReady = true;
         }
@@ -240,14 +241,25 @@ public class VideoDetailActivity extends BaseActivity {
     }
 
     private void gotoPlayVideo(String key, List<SevenVideoSource.VideoUrl> videoUrls) {
+        Intent intent = null;
+
         switch (key) {
             case SevenVideoSource.AVGLE:
                 String[] split = videoUrls.get(0).url.split("/");
-                Intent intent = WebViewActivity.newIntent(VideoDetailActivity.this, split[split.length - 2]);
-                startActivity(intent);
-                return;
+                String url = "https://appassets.androidplatform.net/assets/avgle/avgle.html?id="+split[split.length - 2];
+
+                intent = WebViewActivity.newIntent(VideoDetailActivity.this, url);
+
+                break;
+            case SevenVideoSource.FEMBED:
+//                intent = WebViewActivity.newIntent(VideoDetailActivity.this, videoUrls.get(0).url);
+                intent = VideoPlayActivity.newIntent(VideoDetailActivity.this, mVideoDetail);
             default:
-                return;
+                break;
+        }
+
+        if (intent != null) {
+            startActivity(intent);
         }
     }
 
@@ -414,6 +426,7 @@ public class VideoDetailActivity extends BaseActivity {
         NetflavAPI.INSTANCE.searchVideo(mVideoDetail.getId()).subscribeOn(Schedulers.io())
                 .flatMap((response) -> {
                     String url = NetflavParser.parsePageUrl(response, mVideoDetail.getId());
+                    Log.d("VideoDetailActivity", url);
                     if(url.length() > 0){
                         return NetflavAPI.INSTANCE.getVideo(url);
                     } else {
@@ -426,6 +439,7 @@ public class VideoDetailActivity extends BaseActivity {
                     public void onNext(String s) {
                         if (s.length() > 0){
                             String url = NetflavParser.parseSource(s);
+                            Log.d("VideoDetailActivity", url);
                             mVideoDetail.getSevenVideoSource().addSource(SevenVideoSource.FEMBED, url + " ");
                         }
                     }

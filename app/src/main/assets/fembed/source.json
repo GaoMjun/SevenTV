@@ -1,0 +1,92 @@
+{
+  "success": true,
+  "player": {
+    "poster_file": "/userdata/219325/poster/r/yd/ryd4dtempwe3nm1.png?v=1582837473",
+    "logo_file": "/userdata/219325/player/5022_logo.png?v=1558687378",
+    "logo_position": "control-bar",
+    "logo_link": "https://7mmtv.tv",
+    "logo_margin": 10,
+    "aspectratio": "16:9",
+    "powered_text": "7mmtv.tv",
+    "powered_url": "https://7mmtv.tv",
+    "css_background": "rgba(0, 0, 0, 0)",
+    "css_text": "#f2f2f2",
+    "css_menu": "#333333",
+    "css_mntext": "#ffffff",
+    "css_caption": "#000000",
+    "css_cttext": "#ffffff",
+    "css_ctsize": "15",
+    "css_ctopacity": "40",
+    "css_icon": "rgba(255, 255, 255, 0.8)",
+    "css_ichover": "#ffffff",
+    "css_tsprogress": "#f2f2f2",
+    "css_tsrail": "rgba(255, 255, 255, 0.3)",
+    "css_button": "#565656",
+    "css_bttext": "#ffffff",
+    "opt_autostart": false,
+    "opt_title": false,
+    "opt_quality": true,
+    "opt_caption": true,
+    "opt_download": false,
+    "opt_sharing": true,
+    "opt_playrate": true,
+    "opt_mute": false,
+    "opt_loop": false,
+    "opt_vr": true,
+    "opt_cast": false,
+    "opt_nodefault": true,
+    "opt_forceposter": false,
+    "opt_parameter": false,
+    "restrict_domain": "",
+    "restrict_action": "DoNothing",
+    "restrict_target": "",
+    "adb_enable": true,
+    "adb_offset": "0",
+    "adb_text": "Please turn off adblockers in order to continue watching",
+    "ads_adult": true,
+    "ads_pop": false,
+    "ads_vast": true,
+    "ads_free": 0,
+    "trackingId": "",
+    "viewId": "",
+    "income": {
+      "client": "vast",
+      "schedule": {
+        "vast-51%": {
+          "tag": "https://syndication.exosrv.com/splash.php?idzone=3352084",
+          "offset": "51%",
+          "skipoffset": 5
+        }
+      }
+    },
+    "incomePop": [],
+    "resume_text": "Welcome back! You left off at xx:xx:xx. Would you like to resume watching?",
+    "resume_yes": "Yes, Please",
+    "resume_no": "No, Thanks",
+    "resume_enable": true,
+    "css_ctedge": "none",
+    "logger": "https://v3.fstats.xyz",
+    "revenue": "https://w.mostviewed.xyz/scripting/babydonotblockme?a=1",
+    "revenue_fallback": "https://obefjbb4mykw.com/5b/21/a4/5b21a4c9ac53b3c5cd8a7859cbca88a5.js",
+    "revenue_track": "https://mc.yandex.ru/watch/56353696"
+  },
+  "data": [
+    {
+      "file": "https://fvs.io/redirector?token=R2NyQ2xKQ0UrVjY4TlBZUEpjNkZDcjRGMzMrb2pYRUNoUGpQR2dJUVVrMGo2N3lUVjdmb2dFTGQvRmZSeFkrUmJsNHVWWXFrNEpVdVdyTXpkVHZRVEw0WUNlejdZZFp5OHZhV0dScFpYeGtXa0kybWhqaU9tZjNiaitDbEdUMlRFNUE2WXltRHh3YXZaTk5WUkgrZnQvTXM0L0RpZi9CMkZNaz06cFV5Yko3ZXlOQkFhUCt4R2FiQU9nQT09",
+      "label": "480p",
+      "type": "mp4"
+    },
+    {
+      "file": "https://fvs.io/redirector?token=a044QnczNDdia1JnVys1N2JrcEVPVnlHNy9QWnpoYTQyUE9yNG5wcmx1M1VVRVBPQUZabmdoUXY3QmoyS2diK0J4c3J2a0pHd21rTFlvSkE4TXhZM1J6c1ZlOHNpREt1WmRSYzB6UTEzTU9VeGtFWVdkV1RRcTF6VUIxK01hc2NVRUwwc2gxaTlLeVFVTTUyRlJqSDlHb1JFVkF2Zlc0Y1JYST06U0pHQ2ltakRWY1JwQkZ2akpQTkR0QT09",
+      "label": "720p",
+      "type": "mp4"
+    },
+    {
+      "file": "https://fvs.io/redirector?token=cU5RSUgrOG5FWVZVRDYwSjhpOU9STG9rSzFrUkJRNTJzMHhtZ0g1ekRwd0ZWWEZycTdwYkRob3NXczN6dlAwSDNycGVJdHRrWVJTV2NyWjZOVklmOUxVdlZOM295NHUvN2h3MmN3YS9UbUhOY2puMlpDK1NNcDNIc1RGelk3UHlzWUVHTTVnMWNQRU9PMWtTaGlXd0hnTG1xQWVvanJ0YlF2clo6WUZQWXBJcTBYSFNiN0MwWi9aLzJEZz09",
+      "label": "1080p",
+      "type": "mp4"
+    }
+  ],
+  "captions": [],
+  "is_vr": false
+}
