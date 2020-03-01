@@ -45,7 +45,7 @@ public class SevenTVApplication extends Application {
         mColor = PreferenceManager.getDefaultSharedPreferences(this).getString("theme_color", "pink");
 
         if (BuildConfig.DEBUG) {
-//            WebView.setWebContentsDebuggingEnabled(true);
+            WebView.setWebContentsDebuggingEnabled(true);
         }
     }
 

@@ -242,18 +242,19 @@ public class VideoDetailActivity extends BaseActivity {
 
     private void gotoPlayVideo(String key, List<SevenVideoSource.VideoUrl> videoUrls) {
         Intent intent = null;
+        String[] split = videoUrls.get(0).url.split("/");
+        String url = "https://seven.tv/assets";
 
         switch (key) {
             case SevenVideoSource.AVGLE:
-                String[] split = videoUrls.get(0).url.split("/");
-                String url = "https://appassets.androidplatform.net/assets/avgle/avgle.html?id="+split[split.length - 2];
-
+                url += "/avgle/avgle.html?id=" + split[split.length - 2];
                 intent = WebViewActivity.newIntent(VideoDetailActivity.this, url);
 
                 break;
             case SevenVideoSource.FEMBED:
-//                intent = WebViewActivity.newIntent(VideoDetailActivity.this, videoUrls.get(0).url);
-                intent = VideoPlayActivity.newIntent(VideoDetailActivity.this, mVideoDetail);
+                url += "/fembed/fembed.html?id=" + split[split.length-1];
+                intent = WebViewActivity.newIntent(VideoDetailActivity.this, url);
+//                intent = VideoPlayActivity.newIntent(VideoDetailActivity.this, mVideoDetail);
             default:
                 break;
         }

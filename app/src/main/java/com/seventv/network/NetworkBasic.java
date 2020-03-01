@@ -58,8 +58,10 @@ import okhttp3.Cookie;
 import okhttp3.CookieJar;
 import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
+import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
 import retrofit2.Retrofit;
@@ -95,7 +97,7 @@ public class NetworkBasic {
                     return cookies != null ? cookies : new ArrayList<Cookie>();
                 }
             })
-            .dns(new SelfDns())
+            .dns(SelfDns.INSTANCE)
             .build();
 
     public static Observable<String> getRedirectsUrl(String originUrl) {
@@ -257,6 +259,45 @@ public class NetworkBasic {
                     @Override
                     public void onComplete() {}
                 });
+    }
+
+    public static String getRedirectLink(String url) {
+        String link = "";
+
+        try {
+            OkHttpClient httpClient = new OkHttpClient.Builder()
+                    .dns(SelfDns.INSTANCE)
+                    .followRedirects(false)
+                    .followSslRedirects(false)
+                    .build();
+            Response response = httpClient.newCall(new Request.Builder().url(url).build()).execute();
+            if (response.code() == 302) {
+                link = response.header("location");
+            }
+            response.close();
+        } catch (IOException e) {
+//            e.printStackTrace();
+        }
+
+        return link;
+    }
+
+    public static String postSync(String url) throws IOException {
+        String s = "";
+
+        RequestBody requestBody = new MultipartBody.Builder()
+                .setType(MultipartBody.FORM)
+                .addFormDataPart("", "")
+                .build();
+
+        Response response = HTTP_CLIENT.newCall(new Request.Builder().url(url).post(requestBody).build()).execute();
+        if (response.code() == 200) {
+            s = response.body().string();
+        }
+
+        response.close();
+
+        return s;
     }
 
     public static String getSync(String urlString){

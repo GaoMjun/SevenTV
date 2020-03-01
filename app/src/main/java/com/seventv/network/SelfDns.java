@@ -1,5 +1,7 @@
 package com.seventv.network;
 
+import com.seventv.model.SevenVideoSource;
+
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
@@ -15,7 +17,9 @@ public class SelfDns implements Dns {
 
     private Map<String, List<InetAddress>> cache = new HashMap<>();
 
-    public SelfDns() {
+    public static SelfDns INSTANCE = Holder.INSTANCE;
+
+    private SelfDns() {
         try {
             cache.put("avgle.com", Arrays.asList(InetAddress.getByName("104.27.154.26"), InetAddress.getByName("104.27.155.26")));
             cache.put("www.avgle.com", Arrays.asList(InetAddress.getByName("104.27.154.26"), InetAddress.getByName("104.27.155.26")));
@@ -61,4 +65,9 @@ public class SelfDns implements Dns {
 
         return addresses;
     }
+
+    private static class Holder {
+        static final SelfDns INSTANCE = new SelfDns();
+    }
+
 }
