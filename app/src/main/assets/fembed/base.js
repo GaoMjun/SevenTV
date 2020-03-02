@@ -10723,7 +10723,7 @@ var clientSide = {
         this.player = jwplayer("vstr");
         this.player.setup(this.pl);
         this.player.once('play', function() {
-            clientSide.ping();
+//            clientSide.ping();
         });
         this.player.on('time', function(e) {
             if (clientSide.lp == -1)
@@ -10739,8 +10739,8 @@ var clientSide = {
             }
             clientSide.lp = e.position;
             clientSide.setResume();
-            clientSide.revenue();
-            clientSide.adbDetect();
+//            clientSide.revenue();
+//            clientSide.adbDetect();
         });
         this.player.once("ready", function() {
             if (!clientSide.popResume()) {

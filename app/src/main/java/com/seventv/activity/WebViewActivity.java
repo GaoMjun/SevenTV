@@ -88,10 +88,6 @@ public class WebViewActivity extends BaseActivity {
         webSettings.setDomStorageEnabled(true);
         mWebView.setWebViewClient(new WebViewClient() {
 
-//            @Override
-//            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-//                return true;
-//            }
 
             @Override
             public WebResourceResponse shouldInterceptRequest (final WebView view, String url) {
