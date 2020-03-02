@@ -107,17 +107,6 @@ public class WebViewActivity extends BaseActivity {
                     return  assetLoader.shouldInterceptRequest(Uri.parse(url));
                 }
 
-                try {
-                    String filename = FilenameUtils.getName(new URL(url).getPath());
-                    InputStream inputStream = WebViewActivity.this.getAssets().open("avgle/"+filename);
-                    if (inputStream != null) {
-                        inputStream.close();
-
-                        return assetLoader.shouldInterceptRequest(Uri.parse("https://seven.tv/assets/avgle/"+filename));
-                    }
-                } catch (Exception e) {
-                }
-
                 return super.shouldInterceptRequest(view, url);
             }
         });
@@ -157,6 +146,23 @@ public class WebViewActivity extends BaseActivity {
             @Override
             public WebResourceResponse shouldInterceptRequest(WebResourceRequest request) {
                 Log.d("ServiceWorkerController", request.getUrl().toString());
+
+                if (request.getUrl().toString().startsWith("https://seven.tv/assets/fembed/download_start")) {
+                    Uri download_url = Uri.parse(request.getUrl().getQueryParameter("url"));
+
+                    Intent intent = new Intent(Intent.ACTION_VIEW, download_url);
+                    intent.setDataAndType(download_url, "video/mp4");
+
+                    WebViewActivity.this.mWebView.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            WebViewActivity.this.startActivity(intent);
+                        }
+                    }, 500);
+
+
+                    return new WebResourceResponse("", "", null);
+                }
 
                 if (request.getUrl().toString().equals("https://seven.tv/assets/fembed/source.json")) {
                     String id = Uri.parse(WebViewActivity.this.url).getQueryParameter("id");

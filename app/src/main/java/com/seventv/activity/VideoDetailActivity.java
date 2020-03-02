@@ -226,15 +226,6 @@ public class VideoDetailActivity extends BaseActivity {
                     String key = keys.get(0);
                     gotoPlayVideo(key, videoSources.get(keys.get(0)));
                 }
-
-//                Intent intent;
-//                if(mVideoDetail.getSevenVideoSource().needMoreSource()){
-//                    String[] split = mVideoDetail.getSevenVideoSource().getVideoSources().get(SevenVideoSource.AVGLE).get(0).url.split("/");
-//                    intent = WebViewActivity.newIntent(VideoDetailActivity.this, split[split.length - 2]);
-//                } else {
-//                    intent = VideoPlayActivity.newIntent(VideoDetailActivity.this, mVideoDetail);
-//                }
-//                startActivity(intent);
             }
         });
         mFloatingActionButton.bringToFront();

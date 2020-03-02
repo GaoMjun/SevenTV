@@ -10631,18 +10631,23 @@ var clientSide = {
         this.pc.incomePop = nIP;
     },
     downloadButton: function() {
-        if (this.pc.opt_download) {
+        if (true || this.pc.opt_download) {
+            var that = this;
             this.player.addButton('<svg class="jw-svg-icon jw-svg-icon-download" viewBox="609.4 645.8 93.2 100" xmlns="http://www.w3.org/2000/svg"><path class="st0" d="m696.2 745.8h-80.2c-3.7 0-6.6-2.9-6.6-6.6v-26.7c0-3.7 2.9-6.6 6.6-6.6s6.6 2.9 6.6 6.6v20h66.7v-20c0-3.7 2.9-6.6 6.6-6.6s6.6 2.9 6.6 6.6v26.7c0.3 3.7-2.6 6.6-6.3 6.6zm-36-38.3c-2.3 2.1-6 2.1-8.4 0l-20.8-19.1c-2.3-2.1-2.3-5.4 0-7.6s6-2.1 8.4 0l9.9 9.1v-37.5c0-3.7 2.9-6.6 6.6-6.6s6.6 2.9 6.6 6.6v37.4l9.9-9.1c2.3-2.1 6-2.1 8.4 0 2.3 2.1 2.3 5.4 0 7.6l-20.6 19.2z"/></svg>', "Download Video", function() {
-                try {
-                    var tab = window.open('/f/' + clientSide.id, '_blank');
-                    if (tab) {
-                        tab.focus();
-                    } else {
-                        window.location.href = '/f/' + clientSide.id;
-                    }
-                } catch (e) {
-                    window.location.href = '/f/' + clientSide.id;
-                }
+
+                jwplayer().pause();
+                $.get("download_start?url="+clientSide.pl.sources[that.player.getCurrentQuality()].file);
+
+//                try {
+//                    var tab = window.open('/f/' + clientSide.id, '_blank');
+//                    if (tab) {
+//                        tab.focus();
+//                    } else {
+//                        window.location.href = '/f/' + clientSide.id;
+//                    }
+//                } catch (e) {
+//                    window.location.href = '/f/' + clientSide.id;
+//                }
             }, "download");
         }
     },
