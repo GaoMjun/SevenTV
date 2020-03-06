@@ -249,7 +249,7 @@ public class VideoDetailActivity extends BaseActivity {
             default:
                 break;
         }
-
+        intent = WebViewActivity.newIntent(VideoDetailActivity.this, url += "/avgle/avgle.html?id=bdec15a8cfe2e0763461");
         if (intent != null) {
             startActivity(intent);
         }
