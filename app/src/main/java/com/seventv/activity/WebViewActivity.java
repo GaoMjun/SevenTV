@@ -77,7 +77,6 @@ public class WebViewActivity extends BaseActivity {
         ButterKnife.bind(this);
 
         url = getIntent().getStringExtra(EXTRA_URL);
-        url = getIntent().getStringExtra(EXTRA_URL);
 
         WebViewAssetLoader assetLoader = new WebViewAssetLoader.Builder().setDomain("seven.tv")
                 .addPathHandler("/assets/", new WebViewAssetLoader.AssetsPathHandler(this))

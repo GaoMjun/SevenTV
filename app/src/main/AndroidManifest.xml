@@ -77,6 +77,12 @@
             android:screenOrientation="landscape">
         </activity>
 
+        <activity android:name=".activity.MagnetLinksActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|uiMode|orientation|screenSize|smallestScreenSize"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait">
+        </activity>
+
         <provider
             android:authorities="${applicationId}.fileprovider"
             android:name="androidx.core.content.FileProvider"

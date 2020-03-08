@@ -39,7 +39,14 @@
             android:id="@+id/movie_idols"
             layout="@layout/content_idols"/>
 
-
+        <Button
+            android:id="@+id/searchMagnetLinkButton"
+            android:text="Search Magnet Link"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAllCaps="false"
+            android:backgroundTint="?attr/colorPrimary"
+            android:textColor="#FFFFFF"/>
 
     </LinearLayout>
 

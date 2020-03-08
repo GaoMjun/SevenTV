@@ -23,6 +23,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -94,6 +95,8 @@ public class VideoDetailActivity extends BaseActivity {
     RecyclerView mScreenshotsRecyclerView;
     @BindView(R.id.screenshots_empty_text)
     TextView mScreenshotsEmptyTextView;
+    @BindView(R.id.searchMagnetLinkButton)
+    Button mSearchMagnetLinkButton;
 
     MenuItem mStarButton;
 
@@ -123,6 +126,14 @@ public class VideoDetailActivity extends BaseActivity {
 
         initRecyclerViews();
         getData();
+
+        mSearchMagnetLinkButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = MagnetLinksActivity.newIntent(VideoDetailActivity.this, mVideoDetail.getId());
+                startActivity(intent);
+            }
+        });
     }
 
     private void getData(){
