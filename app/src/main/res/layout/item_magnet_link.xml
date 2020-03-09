@@ -3,8 +3,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="60dp"
-    app:contentPadding="1dp"
+    android:layout_height="70dp"
+    app:cardPreventCornerOverlap="true"
+    app:cardUseCompatPadding="true"
     android:clickable="true"
     android:id="@+id/magnet_link_card_view">
 
@@ -16,10 +17,45 @@
             android:id="@+id/magnet_link_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_centerVertical="true"
-            android:textSize="24sp"
-            android:text="AAA-123"/>
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="4dp"
+            android:text="AAA-123"
+            android:textColor="?android:textColorPrimary"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/magnet_link_size"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="10dp"
+            android:text="6.19GB"
+            android:textAlignment="viewEnd" />
+
+        <TextView
+            android:id="@+id/magnet_link_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="4dp"
+            android:text="2020-03-07"
+            android:textAlignment="viewEnd" />
+
+        <TextView
+            android:id="@+id/magnet_link_url"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@id/magnet_link_title"
+            android:layout_toStartOf="@id/magnet_link_date"
+            android:layout_marginEnd="10dp"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:layout_marginBottom="4dp"
+            android:layout_alignParentBottom="true"
+            android:text="magnet:?xt=urn:btih:D6F74471338C51ADB60BD994716D388A2508AC52&amp;dn=ssni-727-C" />
     </RelativeLayout>
 
 
