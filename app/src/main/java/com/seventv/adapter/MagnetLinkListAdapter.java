@@ -1,5 +1,7 @@
 package com.seventv.adapter;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -25,8 +27,8 @@ public class MagnetLinkListAdapter extends BaseQuickAdapter<MagnetLink, BaseView
         helper.setText(R.id.magnet_link_size, item.getSize());
         helper.setText(R.id.magnet_link_date, item.getDate());
         helper.setOnClickListener(R.id.magnet_link_card_view, v -> {
-
-            Log.d("MagnetLinkListAdapter", item.getLink());
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(item.getLink()));
+            mContext.startActivity(intent);
         });
     }
 }
