@@ -1,5 +1,7 @@
 package com.seventv.network;
 
+import android.util.Log;
+
 import com.seventv.model.SevenVideoSource;
 
 import java.net.InetAddress;
@@ -14,6 +16,8 @@ import fuckdns.Fuckdns;
 import okhttp3.Dns;
 
 public class SelfDns implements Dns {
+
+    private static final String TAG = "SelfDns";
 
     private Map<String, List<InetAddress>> cache = new HashMap<>();
 
@@ -39,6 +43,10 @@ public class SelfDns implements Dns {
 //            cache.put("www.rapidvideo.com", Arrays.asList(InetAddress.getByName("104.26.2.45"), InetAddress.getByName("104.26.3.45")));
 
             cache.put("7mmtv.tv", Arrays.asList(InetAddress.getByName("104.18.38.251"), InetAddress.getByName("104.18.39.251")));
+            cache.put("file.7mmtv.tv", Arrays.asList(InetAddress.getByName("163.172.90.92")));
+            cache.put("file2.7mmtv.tv", Arrays.asList(InetAddress.getByName("195.154.119.180")));
+
+            cache.put("pics.dmm.co.jp", Arrays.asList(InetAddress.getByName("202.6.244.93")));
 
             cache.put("verystream.com", Arrays.asList(InetAddress.getByName("34.235.250.63")));
         } catch (UnknownHostException e) {

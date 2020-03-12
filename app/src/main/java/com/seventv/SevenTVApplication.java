@@ -13,6 +13,9 @@ import android.util.Log;
 import android.util.TypedValue;
 import android.webkit.WebView;
 
+import com.microsoft.appcenter.AppCenter;
+import com.microsoft.appcenter.analytics.Analytics;
+import com.microsoft.appcenter.crashes.Crashes;
 import com.seventv.model.database.FavoriteDbHelper;
 import java.util.Locale;
 
@@ -47,6 +50,8 @@ public class SevenTVApplication extends Application {
         if (BuildConfig.DEBUG) {
             WebView.setWebContentsDebuggingEnabled(true);
         }
+
+        AppCenter.start(this, "543271e7-2585-4f03-a8fc-c3de7ee05c92", Analytics.class, Crashes.class);
     }
 
     public static long getVersionCode(Context context){
