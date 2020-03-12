@@ -77,7 +77,7 @@ public class MainActivity extends BaseActivity {
         mSavedInstanceState = savedInstanceState;
         setSupportActionBar(mToolbar);
 
-        if(PreferenceManager.getDefaultSharedPreferences(this).getBoolean("auto_update", true)){
+        if(PreferenceManager.getDefaultSharedPreferences(this).getBoolean("auto_update", false)) {
             Log.d("Main", "auto_update");
             NetworkBasic.checkUpdate(this, false);
         }
@@ -142,8 +142,8 @@ public class MainActivity extends BaseActivity {
                         new PrimaryDrawerItem().withIdentifier(ID_UNCENSORED).withName(getString(R.string.uncensored)).withIcon(R.drawable.ic_uncensored).withIconTintingEnabled(true).withSelectedIconColor(colorPrimary).withSelectedTextColor(colorPrimary),
                         new PrimaryDrawerItem().withIdentifier(ID_CHINESE).withName(getString(R.string.chinese)).withIcon(R.drawable.ic_chinese).withIconTintingEnabled(true).withSelectedIconColor(colorPrimary).withSelectedTextColor(colorPrimary),
                         new DividerDrawerItem(),
-                        new PrimaryDrawerItem().withIdentifier(ID_FAVORITE).withName(getString(R.string.favorite)).withIcon(R.drawable.ic_star).withIconTintingEnabled(true).withSelectable(false),
-                        new PrimaryDrawerItem().withIdentifier(ID_SETTING).withName(getString(R.string.setting)).withIcon(R.drawable.ic_setting).withIconTintingEnabled(true).withSelectable(false)
+                        new PrimaryDrawerItem().withIdentifier(ID_FAVORITE).withName(getString(R.string.favorite)).withIcon(R.drawable.ic_star).withIconTintingEnabled(true).withSelectable(false)
+//                        new PrimaryDrawerItem().withIdentifier(ID_SETTING).withName(getString(R.string.setting)).withIcon(R.drawable.ic_setting).withIconTintingEnabled(true).withSelectable(false)
                 )
                 .withSelectedItem(ID_CENSORED)
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {

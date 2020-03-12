@@ -8,7 +8,7 @@ import retrofit2.http.Headers;
 
 public interface GithubAPI {
 
-    String BASE_URL = "https://universal.bigbuckbunny.workers.dev/over-driver/SevenTV/master/";
+    String BASE_URL = "https://universal.bigbuckbunny.workers.dev/GaoMjun/SevenTV/master/";
     GithubAPI INSTANCE = NetworkBasic.getRetrofit(BASE_URL).create(GithubAPI.class);
 
     @GET("version.json")

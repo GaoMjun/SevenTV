@@ -91,7 +91,7 @@ public class FileBasic {
     }
 
     public static String getApkUri(String versionName){
-        return "https://github.com/over-driver/SevenTV/releases/download/" + versionName + "/" + getApkName(versionName);
+        return "https://github.com/GaoMjun/SevenTV/releases/download/" + versionName + "/" + getApkName(versionName);
     }
 
     public static void downloadInstallApk(Context context, VersionInfo versionInfo){

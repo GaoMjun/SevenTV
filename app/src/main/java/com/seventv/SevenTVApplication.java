@@ -42,7 +42,7 @@ public class SevenTVApplication extends Application {
         }
         setLocale(sp.getString("language", "auto"));
 
-        String nightMode = PreferenceManager.getDefaultSharedPreferences(this).getString("night_mode", "off");
+        String nightMode = PreferenceManager.getDefaultSharedPreferences(this).getString("night_mode", "system");
         setNightMode(nightMode);
 
         mColor = PreferenceManager.getDefaultSharedPreferences(this).getString("theme_color", "pink");
@@ -111,7 +111,7 @@ public class SevenTVApplication extends Application {
                 nightModeCode = AppCompatDelegate.MODE_NIGHT_AUTO;
                 break;
             default:
-                nightModeCode = AppCompatDelegate.MODE_NIGHT_NO;
+                nightModeCode = AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM;
         }
         AppCompatDelegate.setDefaultNightMode(nightModeCode);
     }
