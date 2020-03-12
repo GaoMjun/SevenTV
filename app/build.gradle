@@ -19,6 +19,11 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+
+            buildConfigField("String", "AppCenterSecret", "\"${System.env.AppCenterSecret}\"")
+        }
+        debug {
+            buildConfigField("String", "AppCenterSecret", "\"${System.env.AppCenterSecret}\"")
         }
     }
 

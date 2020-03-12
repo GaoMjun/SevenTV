@@ -51,7 +51,7 @@ public class SevenTVApplication extends Application {
             WebView.setWebContentsDebuggingEnabled(true);
         }
 
-        AppCenter.start(this, "543271e7-2585-4f03-a8fc-c3de7ee05c92", Analytics.class, Crashes.class);
+        AppCenter.start(this, BuildConfig.AppCenterSecret, Analytics.class, Crashes.class);
     }
 
     public static long getVersionCode(Context context){
