@@ -10,7 +10,7 @@ import retrofit2.http.Query;
 
 public interface JavbusAPI {
 
-    String BASE_URL = "https://www.javbus.com/";
+    String BASE_URL = "https://www.cdnbus.cloud/";
 
     JavbusAPI INSTANCE = NetworkBasic.getRetrofit(BASE_URL).create(JavbusAPI.class);
 

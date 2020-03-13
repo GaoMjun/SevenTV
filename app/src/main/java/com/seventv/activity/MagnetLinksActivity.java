@@ -35,7 +35,7 @@ public class MagnetLinksActivity extends BaseActivity {
         ButterKnife.bind(this);
 
         setSupportActionBar(mToolbar);
-        getSupportActionBar().setTitle(getString(R.string.setting));
+        getSupportActionBar().setTitle("Magnet");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         getSupportFragmentManager()

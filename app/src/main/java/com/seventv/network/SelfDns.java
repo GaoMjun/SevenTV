@@ -49,6 +49,8 @@ public class SelfDns implements Dns {
             cache.put("pics.dmm.co.jp", Arrays.asList(InetAddress.getByName("202.6.244.93")));
 
             cache.put("verystream.com", Arrays.asList(InetAddress.getByName("34.235.250.63")));
+
+            cache.put("www.cdnbus.cloud", Arrays.asList(InetAddress.getByName("104.28.2.3")));
         } catch (UnknownHostException e) {
             e.printStackTrace();
         }
