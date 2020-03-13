@@ -5,16 +5,17 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
+
 import androidx.appcompat.app.AlertDialog;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
-import androidx.preference.PreferenceManager;
-import android.util.Log;
+
 import com.seventv.R;
 import com.seventv.SevenTVApplication;
 import com.seventv.activity.MainActivity;
-import com.seventv.utils.FileBasic;
 import com.seventv.network.NetworkBasic;
+import com.seventv.utils.FileBasic;
 
 public class SettingFragment extends PreferenceFragmentCompat {
 

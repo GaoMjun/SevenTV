@@ -292,7 +292,7 @@ public class VideoDetailActivity extends BaseActivity {
             mGenresEmptyTextView.setVisibility(View.VISIBLE);
         } else {
             ((FlexboxLayoutManager) mGenresRecyclerView.getLayoutManager()).setJustifyContent(JustifyContent.FLEX_START);
-            ((FlexboxLayoutManager) mGenresRecyclerView.getLayoutManager()).setAlignItems(AlignItems.CENTER);;
+            ((FlexboxLayoutManager) mGenresRecyclerView.getLayoutManager()).setAlignItems(AlignItems.CENTER);
             ((GenreAdapter) mGenresRecyclerView.getAdapter()).setNewData(genres);
         }
     }

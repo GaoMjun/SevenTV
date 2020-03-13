@@ -43,7 +43,7 @@ public class FavoriteActivity extends BaseActivity {
         setContentView(R.layout.activity_favorite);
         ButterKnife.bind(this);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(getString(R.string.favorite));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

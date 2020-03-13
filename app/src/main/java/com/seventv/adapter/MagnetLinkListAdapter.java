@@ -2,7 +2,6 @@ package com.seventv.adapter;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;

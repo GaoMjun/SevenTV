@@ -1,7 +1,6 @@
 package com.seventv.network.parser.item.netflav;
 
-import java.util.*;
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class InitialState {
     private Actress test;

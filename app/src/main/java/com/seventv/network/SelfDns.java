@@ -1,9 +1,5 @@
 package com.seventv.network;
 
-import android.util.Log;
-
-import com.seventv.model.SevenVideoSource;
-
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.ArrayList;

@@ -66,7 +66,7 @@ public class GenreAdapter extends RecyclerView.Adapter<GenreAdapter.FlexViewHold
         public TextView mTextView;
         public FlexViewHolder(View itemView) {
             super(itemView);
-            mTextView = (TextView) itemView.findViewById(R.id.genre_text_view);
+            mTextView = itemView.findViewById(R.id.genre_text_view);
         }
     }
 }

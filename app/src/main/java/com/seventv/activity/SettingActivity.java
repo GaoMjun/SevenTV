@@ -3,12 +3,13 @@ package com.seventv.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import android.view.MenuItem;
+
+import androidx.appcompat.widget.Toolbar;
 
 import com.seventv.R;
 import com.seventv.fragment.SettingFragment;
+
 import butterknife.ButterKnife;
 
 public class SettingActivity extends BaseActivity {
@@ -23,7 +24,7 @@ public class SettingActivity extends BaseActivity {
         setContentView(R.layout.activity_setting);
         ButterKnife.bind(this);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(getString(R.string.setting));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

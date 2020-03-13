@@ -49,7 +49,7 @@ public class SwitchVideoTypeDialog extends Dialog {
 
         LayoutInflater inflater = LayoutInflater.from(mContext);
         View view = inflater.inflate(R.layout.switch_video_dialog, null);
-        listView = (ListView) view.findViewById(R.id.switch_dialog_list);
+        listView = view.findViewById(R.id.switch_dialog_list);
         setContentView(view);
         adapter = new ArrayAdapter<>(mContext, R.layout.switch_video_dialog_item, data);
         listView.setAdapter(adapter);

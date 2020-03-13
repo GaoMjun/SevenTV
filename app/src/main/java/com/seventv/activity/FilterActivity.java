@@ -3,11 +3,11 @@ package com.seventv.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
+
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import android.view.MenuItem;
 
 import com.seventv.R;
 import com.seventv.fragment.VideoListFragment;
@@ -38,7 +38,7 @@ public class FilterActivity extends BaseActivity {
         setContentView(R.layout.activity_filter);
         ButterKnife.bind(this);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(getIntent().getStringExtra(EXTRA_FILTER_NAME) + ": " + getIntent().getStringExtra(EXTRA_QUERY_NAME));

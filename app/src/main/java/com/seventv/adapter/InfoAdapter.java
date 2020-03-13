@@ -40,7 +40,7 @@ public class InfoAdapter extends BaseQuickAdapter<Info, BaseViewHolder> {
         });
 
         if (item.getCode() != null){
-            TextView info_key = (TextView) helper.getView(R.id.info_value);
+            TextView info_key = helper.getView(R.id.info_value);
             info_key.setPaintFlags(info_key.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
             helper.setOnClickListener(R.id.info_value, v -> {
                     Intent intent = FilterActivity.newIntent(mContext,

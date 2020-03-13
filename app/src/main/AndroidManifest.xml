@@ -47,12 +47,6 @@
             android:theme="@style/AppTheme.NoActionBar.TransparentStatusBar">
         </activity>
 
-        <activity android:name=".activity.VideoPlayActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize|keyboard"
-            android:screenOrientation="landscape"
-            android:theme="@style/Theme.AppCompat.Translucent">
-        </activity>
-
         <activity
             android:name=".activity.GalleryActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|uiMode|orientation|screenSize|smallestScreenSize"
